@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COESSENS - Perfumería de Lujo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animate on Scroll library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: #2c4a40; /* Verde Bosque Profundo */
+            color: #e8d7b8; /* Oro Claro */
+            transition: background-color 0.5s ease-in-out;
+            overflow-x: hidden; /* Evitar desbordamiento horizontal */
+        }
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(212, 167, 98, 0.5); /* Efecto de resplandor */
+        }
+        .playfair-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-main-gold {
+            color: #d4a762; /* Oro Elegante */
+        }
+        .text-subtle-gold {
+            color: #e8d7b8; /* Oro Claro */
+        }
+        .bg-main-green {
+            background-color: #2c4a40; /* Verde Bosque Profundo */
+        }
+        .bg-secondary-green {
+            background-color: #3b5a4e; /* Verde Musgo */
+        }
+        .btn-gold {
+            background-color: #d4a762;
+            color: #2c4a40;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-gold:hover {
+            background-color: #e8d7b8;
+            box-shadow: 6px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, #2c4a40 0%, #d4a762 50%, #2c4a40 100%);
+            width: 80%;
+            margin: 0 auto;
+        }
+        .cs-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .cs-letter-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .cs-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 10rem;
+            color: #9f8a65; /* Tono más oscuro para la C-S */
+            opacity: 0.9; /* Opacidad aumentada para mayor visibilidad */
+            text-shadow: 0 0 10px rgba(212, 167, 98, 0.7);
+        }
+        .curved-text-c, .curved-text-s {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            color: #d4a762; /* Oro brillante para el texto curvado */
+            font-size: 0.8rem;
+            transition: text-shadow 0.3s ease;
+        }
+        .curved-text-c:hover, .curved-text-s:hover {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+        .curved-text-c span, .curved-text-s span {
+            position: absolute;
+            transform-origin: 0 100%;
+        }
+        .center-la {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: #d4a762;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            z-index: 1;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(212, 167, 98, 0.5);
+        }
+        a {
+            text-decoration: none;
+        }
+        /* Estilos del menú de hamburguesas */
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%; /* Ocupa la mitad de la página */
+            height: 100%;
+            background-color: #3b5a4e; /* Verde Musgo */
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 100;
+            padding-top: 5rem; /* Espacio para el header */
+            overflow-y: auto;
+        }
+        .hamburger-menu.open {
+            transform: translateX(0);
+        }
+        .menu-link, .menu-dropdown-toggle {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e8d7b8;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(212, 167, 98, 0.3);
+            text-align: left;
+            width: 100%;
+            background-color: transparent;
+            border-radius: 0;
+        }
+        .menu-link:hover, .menu-dropdown-toggle:hover {
+            color: #d4a762;
+        }
+        .menu-link.active, .menu-dropdown-toggle.active {
+            color: #d4a762;
+        }
+        .menu-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .menu-dropdown.open {
+            max-height: 200px; /* Suficiente para el despliegue */
+        }
+        .menu-dropdown a {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.25rem;
+            border-left: 2px solid #e8d7b8;
+            margin-left: 1.5rem;
+        }
+        /* Animación de flotar para el enlace CS */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        /* Estilos del carrusel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            flex: 0 0 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .carousel-item > div {
+            width: 100%;
+        }
+        /* Estilos del carrito de compras */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: #3b5a4e;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 100;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: #d4a762;
+            font-size: 2rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-controls button {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            border: 1px solid #d4a762;
+            color: #d4a762;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+        .cart-item-controls button:hover {
+            background-color: #d4a762;
+            color: #2c4a40;
+        }
+        .cart-item-quantity {
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            min-width: 2rem;
+            text-align: center;
+        }
+        /* Estilos para el fondo fijo */
+        .hero-background {
+            background-image: url('img/fondofondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Estilos para el logo SVG */
+        .coessens-logo-svg {
+            fill: #d4a762;
+            transition: fill 0.3s ease;
+        }
+        .coessens-logo-svg:hover {
+            fill: #e8d7b8;
+        }
+        /* Loading indicator */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d4a762;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #3b5a4e;
+            padding: 2rem;
+            border-radius: 1rem;
+            position: relative;
+            max-width: 90%;
+            width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #d4a762;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #d4a762;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        /* Notificación Toast */
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+        }
+        .toast {
+            background-color: rgba(60, 90, 78, 0.9);
+            color: #e8d7b8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(-20px);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Animación de transición para la página */
+        .page-transition {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .page-transition.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilo de la tarjeta de producto */
+        .fragrance-card {
+            background-color: #3b5a4e;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+        }
+        .fragrance-card:hover {
+            border-color: #d4a762;
+            transform: translateY(-5px);
+        }
+        /* Clases para ocultar/mostrar secciones */
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        /* Estilo para los nombres de fragancias */
+        .fragrance-name-highlight {
+            text-shadow: 0 0 5px rgba(212, 167, 98, 0.5);
+        }
+        /* Estilos para el chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        .chatbot-button {
+            background-color: #d4a762;
+            color: #2c4a40;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            width: 72px; 
+            height: 72px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            background-color: #e8d7b8;
+        }
+        .chatbot-window {
+            position: fixed;
+            bottom: 6rem;
+            left: 2rem;
+            width: 90%;
+            max-width: 350px; 
+            height: 350px; 
+            background-color: #3b5a4e;
+            border: 2px solid #d4a762;
+            border-radius: 1.5rem; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%) scale(0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .chatbot-window.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+        .chatbot-header {
+            background-color: #2c4a40;
+            color: #d4a762;
+            padding: 1rem;
+            border-bottom: 2px solid #d4a762;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .chatbot-footer {
+            padding: 1rem;
+            border-top: 2px solid #d4a762;
+            display: flex;
+            align-items: center;
+        }
+        .chatbot-message {
+            max-width: 80%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            line-height: 1.4;
+        }
+        .chatbot-message.bot {
+            background-color: #2c4a40;
+            align-self: flex-start;
+        }
+        .chatbot-message.user {
+            background-color: #d4a762;
+            color: #2c4a40;
+            align-self: flex-end;
+        }
+        .chatbot-footer input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d4a762;
+            background-color: #2c4a40;
+            color: #e8d7b8;
+        }
+        .chatbot-footer button {
+            background-color: #d4a762;
+            color: #2c4a40;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+        .fragrance-card img {
+            object-fit: contain; /* Ajusta la imagen completa */
+            height: 12rem; /* Altura fija para mantener la consistencia */
+            width: auto;
+        }
+        #product-detail-image {
+            object-fit: contain;
+            height: auto;
+            max-height: 36rem; /* Aumentar el tamaño máximo de la imagen */
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased relative">
+    
+    <!-- Modal for Scent Story -->
+    <div id="scent-story-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h3 class="cormorant-font text-3xl font-bold mb-4 text-main-gold">La Historia detrás de la Fragancia</h3>
+            <p id="scent-story-text" class="text-subtle-gold italic"></p>
+        </div>
+    </div>
+    
+    <!-- Notificación Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Sidebar para el carrito de compras -->
+    <aside id="cart-sidebar" class="cart-sidebar">
+        <button id="cart-close-btn" class="cart-close-btn">&times;</button>
+        <h2 class="cormorant-font text-3xl font-bold mb-6 text-main-gold">Carrito de Compras</h2>
+        <div id="cart-items-container" class="flex-grow overflow-y-auto">
+            <p id="empty-cart-message">Tu carrito está vacío.</p>
+        </div>
+        <div class="mt-auto pt-4 border-t border-[#d4a762]">
+            <p class="text-xl text-main-gold font-bold">Total: <span id="cart-total">$0.00</span></p>
+            <button class="btn-gold w-full mt-4 py-3 rounded-full font-bold">
+                Proceder al Pago
+            </button>
+        </div>
+    </aside>
+
+<header class="p-6 flex justify-between items-center sticky top-0 z-50 bg-secondary-green">
+    
+    <a href="#hero-section" onclick="showSection('page-principal')" class="flex items-center space-x-2">
+        <img src="img/logo.png" alt="Logo de COESSENS" class="w-10 h-10 rounded-full" />
+        <span class="cormorant-font text-2xl font-bold tracking-widest text-main-gold">COESSENS</span>
+    </a>
+        <!-- Botón de hamburguesa -->
+        <button id="hamburger-button" aria-label="Abrir menú de navegacion" class="text-white focus:outline-none">
+            <svg class="w-8 h-8 text-main-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Menú de hamburguesa (se desliza de derecha a izquierda) -->
+    <div id="hamburger-menu" class="hamburger-menu">
+        <button id="menu-close-btn" class="menu-close-btn">&times;</button>
+        <nav class="flex flex-col">
+            <a href="#hero-section" class="menu-link" onclick="showSection('page-principal'); closeMenu();">Inicio</a>
+            <!-- Dropdown para Esencias -->
+            <div>
+                <button class="menu-dropdown-toggle w-full text-left flex justify-between items-center" id="essences-toggle">
+                    Esencias
+                    <span>+</span>
+                </button>
+                <div class="menu-dropdown" id="essences-dropdown">
+                    <a href="#" class="menu-link" onclick="showSection('page-para-el'); closeMenu();">Para El</a>
+                    <a href="#" class="menu-link" onclick="showSection('page-para-ella'); closeMenu();">Para Ella</a>
+                </div>
+            </div>
+            <a href="#inspiraciones" class="menu-link" onclick="showSection('page-principal'); scrollAnchor('#inspiraciones'); closeMenu();">Inspiraciones</a>
+            <a href="#beneficios" class="menu-link" onclick="showSection('page-principal'); scrollAnchor('#beneficios'); closeMenu();">Beneficios</a>
+            <a href="#mi-fragancia" class="menu-link" onclick="showSection('page-principal'); scrollAnchor('#mi-fragancia'); closeMenu();">Diseña tu aroma único</a>
+            <a href="#contacto" class="menu-link" onclick="showSection('page-principal'); scrollAnchor('#contacto'); closeMenu();">Contacto</a>
+            <button id="open-cart-btn-mobile" class="menu-link flex items-center justify-between" onclick="closeMenu(); openCart();">
+                <span>Carro de Compra</span>
+                <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 18a2 2 0 1 0 0-4a2 2 0 0 0 0 4zm-7 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4z"/>
+                    <path d="M19 7H7.4a.5.5 0 0 0-.48.37l-1.31 4.38a1.5 1.5 0 0 0 1.45 2.25h10.98a1.5 1.5 0 0 0 1.45-2.25l-1.31-4.38A.5.5 0 0 0 19.6 7H19zm0 0l-1.31-4.38A.5.5 0 0 0 17.6 2H5.4a.5.5 0 0 0-.48.37L3.19 7H2a1 1 0 0 0 0 2h1.59l1.81 6.05A3.5 3.5 0 0 0 10.39 18h7.22a3.5 3.5 0 0 0 3.39-2.95L21.41 9H22a1 1 0 0 0 0-2h-3z"/>
+                </svg>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Floating CTA buttons -->
+    <a href="https://wa.me/573001234567?text=Hola,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20fragancias."
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+       aria-label="Contactar por WhatsApp">
+        <img src="img/whatsicon.png" alt="WhatsApp Icon">
+    </a>
+    
+    <!-- Contenedor principal de secciones -->
+    <div id="main-content" class="container mx-auto px-6 py-12 lg:py-24 page-transition">
+
+        <!-- Página Principal -->
+        <div id="page-principal" class="page-section active">
+            <section id="hero-section" class="hero-background p-8 lg:p-16 mb-20 relative text-center" style="min-height: 80vh;">
+                <!-- Se ha movido la clase hero-background aquí para que solo afecte esta sección -->
+                <div class="absolute inset-0 z-10 flex flex-col justify-center items-center p-8 lg:p-16">
+                    <h1 class="cormorant-font text-5xl md:text-7xl font-bold mb-4 text-[#9f8a65]" data-aos="fade-up" data-aos-duration="1000">
+                        <span style="display: block;">El aroma define</span>
+                        <span style="display: block;">tu presencia</span>
+                    </h1>
+                    <p class="text-lg md:text-xl max-w-xl mb-12 text-subtle-gold" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        Descubre fragancias que no solo huelen increíble, también generan un impacto y perduran.
+                    </p>
+                    <a href="#" onclick="showSection('page-coleccion');" class="relative flex flex-col items-center justify-center animate-float" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                        <div class="flex items-center justify-center">
+                            <div class="cs-letter-container mr-5 md:mr-10">
+                                <span class="cs-letter">C</span>
+                                <div class="curved-text-c"></div>
+                            </div>
+                            <div class="center-la">
+                                - la -
+                            </div>
+                            <div class="cs-letter-container ml-5 md:ml-10">
+                                <span class="cs-letter">S</span>
+                                <div class="curved-text-s"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Sección de Nuestras Esencias -->
+            <section id="productos" class="my-10 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-8 text-white">
+                    Nuestras Esencias
+                </h2>
+                <p class="text-md md:text-lg max-w-3xl mx-auto mb-8 text-subtle-gold">
+                    Descubre nuestra colección de fragancias exclusivas, diseñadas para reflejar tu esencia.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" onclick="showSection('page-para-el')" class="btn-gold px-8 py-3 rounded-full font-bold">Para El</a>
+                    <a href="#" onclick="showSection('page-para-ella')" class="btn-gold px-8 py-3 rounded-full font-bold">Para Ella</a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="inspiraciones" class="my-10 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white">
+                    Las mejores inspiraciones
+                </h2>
+                <p class="text-md md:text-lg max-w-3xl mx-auto mb-8 text-subtle-gold">
+                    Descubre esencias inspiradas en las más reconocidas que generan un impacto y te hagan sobresalir con fragancias de alta calidad que perduran y cautivan.
+                </p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-start gap-6">
+                    <div class="w-full md:w-1/2 max-w-sm rounded-lg p-4 bg-secondary-green border border-transparent hover:border-[#d4a762] transition-all duration-300 mx-auto" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="h-48 rounded-lg mb-3">
+                            <!-- Reemplaza esta URL con tu imagen para la sección de Inspiración -->
+                            <img src="img/inspiracion.jpg" alt="La mejor inspiración" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <h3 class="cormorant-font text-xl font-bold text-main-gold">
+                            Inspiración
+                        </h3>
+                        <p class="text-subtle-gold mt-1 text-sm">
+                            Nuestras fragancias capturan la esencia de las más grandes, ofreciendo un lujo accesible.
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/2 max-w-sm rounded-lg p-4 bg-secondary-green border border-transparent hover:border-[#d4a762] transition-all duration-300 mx-auto" data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="h-48 rounded-lg mb-3">
+                            <!-- Reemplaza esta URL con tu imagen para la sección de Calidad -->
+                            <img src="img/siente.jpeg" alt="La calidad se siente" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <h3 class="cormorant-font text-xl font-bold text-main-gold">
+                            Calidad que se siente
+                        </h3>
+                        <p class="text-subtle-gold mt-1 text-sm">
+                            Creando fragancias inspiradas en las más icónicas, obtendrás una calidad por un precio exclusivo.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="divider"></div>
+
+            <section id="beneficios" class="my-10 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-10 text-white">
+                    Beneficios
+                </h2>
+                <div class="flex flex-col md:flex-row justify-center items-start gap-6">
+                    <div class="w-full md:w-1/2 max-w-sm p-4 rounded-lg bg-secondary-green border border-transparent hover:border-[#d4a762] transition-all duration-300 mx-auto" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="h-40 rounded-lg mb-3">
+                            <!-- Reemplaza esta URL con tu imagen para la sección de Presencia -->
+                            <img src="img/presencia.jpg" alt="Incrementa tu presencia" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <h3 class="cormorant-font text-xl font-bold mb-1 text-main-gold">Incrementa tu presencia</h3>
+                        <p class="text-subtle-gold text-sm">
+                            El aroma es una de las primeras cosas que las personas notan. Una fragancia proyecta confianza y deja una impresión duradera.
+                        </p>
+                    </div>
+                    
+                    <div class="w-full md:w-1/2 max-w-sm p-4 rounded-lg bg-secondary-green border border-transparent hover:border-[#d4a762] transition-all duration-300 mx-auto" data-aos="fade-left" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="h-40 rounded-lg mb-3">
+                            <!-- Reemplaza esta URL con tu imagen para la sección de Sin sobreprecio -->
+                            <img src="img/sobreprecio.jpg" alt="Adiós al sobreprecio" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <h3 class="cormorant-font text-xl font-bold mb-1 text-main-gold">¡Adiós al sobreprecio!</h3>
+                        <p class="text-subtle-gold text-sm">
+                            Nuestras fragancias ofrecen una calidad excepcional sin el costo de marca, ofreciendo una sensación auténtica.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="mi-fragancia" class="my-10 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white">
+                    Tu Fragancia, Tu Esencia: Diseña tu Aroma Único
+                </h2>
+                <p class="text-md md:text-lg max-w-2xl mx-auto mb-8 text-subtle-gold">
+                    En COESSENS, creemos que tu aroma debe ser tan único como tú. Por eso, te invitamos a ser el artista de tu propia fragancia. Responde a unas sencillas preguntas sobre tus gustos, recuerdos y personalidad. Nuestra inteligencia artificial analizará tus respuestas para crear una combinación de notas y esencias que capturen perfectamente tu esencia. El resultado es más que un perfume: es una historia personal, embotellada y lista para ser contada.
+                </p>
+                <a href="https://coesenssperfumeria777.github.io/Coessens/" target="_blank" class="btn-gold inline-block py-3 px-8 rounded-full font-bold">
+                    Crear Mi Fragancia Personalizada
+                </a>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="certificados" class="my-10 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-10 text-white">
+                    Nuestra Promesa de Calidad
+                </h2>
+                <div class="flex flex-wrap justify-center gap-8 text-subtle-gold">
+                    <div class="flex flex-col items-center">
+                        <img src="img/garantia.png" alt="Garantia de Calidad">
+                        <p class="text-sm font-bold mt-2">Garantía de Calidad</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                         <img src="img/reloj.png" alt="Duracion superior">
+                        <p class="text-sm font-bold mt-2">Duración Superior (+12h)</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                       <img src="img/inspirado.png" alt="Inspirado en fragancias de lujo">
+                        <p class="text-sm font-bold mt-2">Inspirado en Fragancias de Lujo</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+            
+            <section class="my-16 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="playfair-font text-3xl md:text-5xl font-bold text-main-gold">
+                    <span class="cormorant-font italic text-4xl">COESSENS,</span> el arte de crear<br>memorias en cada aroma
+                </h2>
+                <p class="text-md md:text-lg max-w-3xl mx-auto mt-6 text-subtle-gold">
+                    En COESSENS, creemos que cada fragancia es una historia. Nuestras esencias están cuidadosamente
+                    elaboradas para evocar emociones, recordar momentos y dejar una marca inolvidable en el tiempo.
+                    No es solo un perfume, es una extensión de ti.
+                </p>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="contacto" class="my-16 text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white">
+                    Contáctanos
+                </h2>
+                <p class="text-md md:text-lg max-w-2xl mx-auto mb-8 text-subtle-gold">
+                    ¿Tienes alguna pregunta, sugerencia o simplemente quieres saludar? Estaremos felices de ayudarte.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 max-w-md mx-auto">
+                    <form id="contact-form" class="w-full flex flex-col gap-4">
+                        <input type="email" id="contact-email" name="email" placeholder="Tu correo electrónico" class="w-full p-3 rounded-md bg-[#2c4a40] border border-[#d4a762] text-subtle-gold placeholder-subtle-gold focus:outline-none focus:ring-2 focus:ring-[#d4a762]">
+                        <textarea id="contact-message-input" name="message" placeholder="Tu mensaje" class="w-full p-3 rounded-md bg-[#2c4a40] border border-[#d4a762] text-subtle-gold placeholder-subtle-gold focus:outline-none focus:ring-2 focus:ring-[#d4a762]" rows="4"></textarea>
+                        <button type="submit" class="btn-gold w-full py-3 px-8 rounded-full font-bold">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+                <div id="contact-message" class="mt-4 text-sm text-center"></div>
+            </section>
+        </div>
+
+        <!-- Colección Completa (Mezclada) -->
+        <div id="page-coleccion" class="page-section">
+            <section class="text-center">
+                <h1 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white" data-aos="fade-up">
+                    Nuestra Colección Completa
+                </h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto text-subtle-gold" data-aos="fade-up" data-aos-delay="200">
+                    Explora todas nuestras fragancias, perfectas para cualquier ocasión y persona.
+                </p>
+            </section>
+
+            <!-- Contenedor para la colección mezclada -->
+            <section class="my-10 text-center">
+                <div id="fragrances-container" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- Las tarjetas de fragancias se renderizarán aquí -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Fragancias para El -->
+        <div id="page-para-el" class="page-section">
+            <section class="text-center">
+                <h1 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white">
+                    Fragancias para Él
+                </h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto text-subtle-gold">
+                    Un aroma distintivo para el hombre moderno.
+                </p>
+            </section>
+            <section class="my-10 text-center">
+                <div id="fragrances-el-container" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- Las tarjetas de fragancias se renderizarán aquí -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Fragancias para Ella -->
+        <div id="page-para-ella" class="page-section">
+            <section class="text-center">
+                <h1 class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-white">
+                    Fragancias para Ella
+                </h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto text-subtle-gold">
+                    Una esencia que celebra la elegancia y la feminidad.
+                </p>
+            </section>
+            <section class="my-10 text-center">
+                <div id="fragrances-ella-container" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- Las tarjetas de fragancias se renderizarán aquí -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Página de detalles del producto -->
+        <div id="page-product-detail" class="page-section">
+            <div class="flex items-center space-x-4 mb-8 text-subtle-gold cursor-pointer hover:text-main-gold transition-colors duration-300" onclick="showSection('page-coleccion')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Volver a la colección</span>
+            </div>
+            <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <img id="product-detail-image" src="" alt="Imagen de la fragancia" class="w-full rounded-lg border border-[#d4a762] shadow-lg">
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h1 id="product-detail-name" class="cormorant-font text-4xl md:text-5xl font-bold mb-4 text-main-gold"></h1>
+                    <div id="product-detail-notes-image-container" class="w-full h-auto mb-4 border border-[#d4a762] rounded-lg overflow-hidden">
+                        <!-- Aquí se insertará la imagen de las notas -->
+                    </div>
+                    <p id="product-detail-story" class="text-lg mb-4 text-subtle-gold"></p>
+                    <div id="product-detail-prices" class="my-4 space-y-2"></div>
+                    <button id="add-to-cart-btn-detail" class="btn-gold w-full py-3 rounded-full font-bold mt-4">
+                        Añadir al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <footer class="p-6 text-center text-subtle-gold text-sm bg-secondary-green">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="https://www.instagram.com" target="_blank" class="hover:text-main-gold transition-colors duration-300">
+                    <img src="img/igicono.png" alt="Instagram Icon">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" class="hover:text-main-gold transition-colors duration-300">
+                <img src="img/tikitikiicon.png" alt="Tiktok Icon">
+            </a>
+            <a href="https://wa.me/573001234567" target="_blank" class="hover:text-main-gold transition-colors duration-300">
+                <img src="img/whatsicon.png" alt="Whatsapp Icon">
+            </a>
+        </div>
+        <p class="cormorant-font">&copy; 2024 COESSENS. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+        <button id="chatbot-button" class="chatbot-button">
+            <!-- Nuevo icono de mensaje -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="text-[#2c4a40]">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </button>
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <span class="cormorant-font text-lg font-bold">Tu Asistente De Fragancias</span>
+                <button id="chatbot-close-btn" class="text-xl">&times;</button>
+            </div>
+            <div id="chatbot-body" class="chatbot-body">
+                <!-- Los mensajes del chatbot se añadirán aquí -->
+            </div>
+            <div class="chatbot-footer">
+                <input type="text" id="chatbot-input" placeholder="Escribe tu mensaje..." />
+                <button id="chatbot-send-btn">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar AOS
+    if (window.AOS && AOS.init) AOS.init();
+    
+    const mainBody = document.body;
+    const sections = {
+        'page-principal': document.getElementById('page-principal'),
+        'page-coleccion': document.getElementById('page-coleccion'),
+        'page-para-el': document.getElementById('page-para-el'),
+        'page-para-ella': document.getElementById('page-para-ella'),
+        'page-product-detail': document.getElementById('page-product-detail')
+    };
+
+    const fragrances = [
+        // Unisex/Hombres
+        { name: 'Invictus Victory', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una explosión de frescura y poder que celebra la victoria. Para el hombre que desafía los límites.', imageUrl: "img/invictus.jpeg", occasion: ['diario', 'deportivo'], notes: ['fresco', 'especiado'], sweetness: 'bajo' },
+        { name: 'La Beau Le Parufum', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una fragancia audaz y carismática que captura la esencia de la fuerza indomable. Un aroma inolvidable.', imageUrl: 'img/le bau le parfum.jpeg', occasion: ['formal', 'noche'], notes: ['dulce', 'ámbar'], sweetness: 'alto' },
+        { name: 'Ombre Nómada', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Un viaje olfativo por el desierto, con notas de cuero y maderas. Ideal para el explorador moderno.', imageUrl: 'img/ombre nomada.jpeg', occasion: ['formal', 'noche'], notes: ['amaderado', 'cuero'], sweetness: 'bajo' },
+        { name: 'Mandarin Sky', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una fragancia cítrica y luminosa, con un toque de frescura del cielo. Perfecta para días soleados.', imageUrl: 'img/mandarin.jpeg', occasion: ['diario'], notes: ['cítrico', 'fresco'], sweetness: 'medio' },
+        { name: 'Sauvage', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una composición radicalmente fresca y cruda, inspirada en los grandes espacios abiertos. Un aroma salvaje y elegante.', imageUrl: 'img/sauvage.jpeg', occasion: ['diario', 'informal'], notes: ['fresco', 'especiado'], sweetness: 'bajo' },
+        { name: 'Club de Nuit', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una fragancia misteriosa y seductora, perfecta para las noches. Combina notas de especias y maderas para un efecto duradero.', imageUrl: 'img/club de nuit.jpeg', occasion: ['noche', 'formal'], notes: ['especiado', 'amaderado'], sweetness: 'medio' },
+        { name: '9pm', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'El aroma de una noche vibrante y llena de energía. Una mezcla de dulzura y frescura que no deja a nadie indiferente.', imageUrl: 'img/9pm.jpeg', occasion: ['noche', 'fiesta'], notes: ['dulce', 'vainilla'], sweetness: 'alto' },
+        { name: 'Santal 33', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Un aroma icónico que evoca el espíritu del oeste americano con notas de sándalo y cuero. Un perfume con carácter.', imageUrl: 'img/santal 33.jpeg', occasion: ['diario', 'informal'], notes: ['amaderado', 'cuero'], sweetness: 'bajo' },
+        { name: 'Khamra Qahwa', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una fragancia gourmand con notas de café y especias. Un aroma cálido y adictivo para los amantes de lo exótico.', imageUrl: 'img/qahwa.jpeg', occasion: ['noche'], notes: ['gourmand', 'especiado'], sweetness: 'alto' },
+        { name: 'Aqua de Gio', type: 'masculine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'La esencia de la brisa marina y la libertad. Un perfume fresco y acuático que captura la energía del mar.', imageUrl: 'img/aqua de gio.jpeg', occasion: ['diario', 'deportivo'], notes: ['fresco', 'acuático'], sweetness: 'bajo' },
+        
+        // Mujeres
+        { name: 'Lattafa Amethyst', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una joya olfativa que combina la dulzura de las frutas con la calidez del ámbar. Una fragancia para la mujer elegante y segura.', imageUrl: 'img/amathyst.jpeg', occasion: ['formal', 'noche'], notes: ['ámbar', 'afrutado'], sweetness: 'medio' },
+        { name: 'Yara', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una mezcla de frutas y flores que te harán sentir como una supermodelo. Una fragancia divertida y coqueta.', imageUrl: 'img/yara.jpeg', occasion: ['diario', 'informal'], notes: ['afrutado', 'floral'], sweetness: 'alto' },
+        { name: 'Cloud Pink', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Un sueño hecho perfume, con un toque de dulzura y la suavidad de las nubes. Para un espíritu joven y soñador.', imageUrl: 'img/cloud pink.jpeg', occasion: ['diario', 'informal'], notes: ['gourmand', 'dulce'], sweetness: 'alto' },
+        { name: 'Montale Intense Coffee', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'El aroma intenso y adictivo del café recién molido, mezclado con la dulzura de la vainilla. Para la mujer sofisticada y apasionada.', imageUrl: 'img/montale.jpeg', occasion: ['noche'], notes: ['gourmand', 'vainilla'], sweetness: 'alto' },
+        { name: '212 VIP Rosé', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una fragancia festiva y elegante, inspirada en la energía de Nueva York. Un aroma vibrante y chispeante para la mujer que vive la vida al máximo.', imageUrl: 'img/212 vip rose.jpeg', occasion: ['fiesta', 'evento'], notes: ['champagne', 'afrutado'], sweetness: 'medio' },
+        { name: 'Ahli Corvus', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Un misterio en una botella, con notas oscuras y florales. Para la mujer enigmática y poderosa.', imageUrl: 'img/ahli corvus.jpeg', occasion: ['noche', 'formal'], notes: ['oscuro', 'floral'], sweetness: 'bajo' },
+        { name: 'D&G Devotion', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Una declaración de amor, con notas de flores blancas y vainilla. Una fragancia dulce y apasionada.', imageUrl: 'img/dolce gabanna.jpeg', occasion: ['formal'], notes: ['floral', 'gourmand'], sweetness: 'alto' },
+        { name: 'Baccarat Rouge 540', type: 'feminine', prices: { '100ml': 34000, '50ml': 22000, '30ml': 17000 }, story: 'Un perfume de lujo con un toque de misterio. Sus notas de ámbar y azafrán crean un aroma inolvidable y elegante.', imageUrl: 'img/bacarout rouge.jpeg', occasion: ['formal', 'noche'], notes: ['ámbar', 'amaderado'], sweetness: 'medio' },
+    ];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    // Función para crear la tarjeta de fragancia
+    function createFragranceCard(fragrance) {
+        const card = document.createElement('div');
+        card.className = 'fragrance-card p-4 rounded-lg flex flex-col items-center text-center shadow-lg cursor-pointer'; // Añadido cursor-pointer
+        card.onclick = () => renderProductDetail(fragrance); // Manejador de clic
+        
+        let pricesHtml = '';
+        for (const [size, price] of Object.entries(fragrance.prices)) {
+            pricesHtml += `
+                <div class="flex justify-center items-center w-full px-2">
+                    <span class="text-subtle-gold text-xl font-bold">${size} :</span>
+                    <span class="text-xl font-bold text-main-gold ml-2">COP ${price}</span>
+                </div>
+            `;
+        }
+        
+        // Usar la URL de la imagen de la fragancia
+        const imageUrl = fragrance.imageUrl || 'https://placehold.co/400x400/2c4a40/e8d7b8?text=Imagen+no+disponible';
+
+        card.innerHTML = `
+            <!-- Coloca aquí la ruta de tu imagen, ej. 'img/tu-imagen.jpg' -->
+            <img src="${imageUrl}" alt="Imagen de la fragancia ${fragrance.name}" class="object-contain h-48 w-full rounded-lg mb-4 border border-[#d4a762]">
+            <h4 class="cormorant-font text-3xl font-bold text-main-gold fragrance-name-highlight">${fragrance.name}</h4>
+            <div class="my-2 space-y-2 w-full">
+                ${pricesHtml}
+            </div>
+        `; // Removido el botón del carrito para moverlo a la página de detalle
+
+        return card;
+    }
+    
+    // Función para renderizar los detalles de un solo producto
+    function renderProductDetail(fragrance) {
+        const productDetailSection = document.getElementById('page-product-detail');
+        if (!productDetailSection) return;
+
+        // Actualizar la información en la plantilla de detalles
+        document.getElementById('product-detail-name').textContent = fragrance.name;
+        document.getElementById('product-detail-image').src = fragrance.imageUrl;
+        document.getElementById('product-detail-image').alt = `Imagen de la fragancia ${fragrance.name}`;
+        
+        // Simulación de imagen de notas, ya que no se tiene la URL real.
+        // El usuario puede editar el código para poner la imagen real.
+        const notesImageContainer = document.getElementById('product-detail-notes-image-container');
+        notesImageContainer.innerHTML = `<img src="https://placehold.co/500x300/3b5a4e/d4a762?text=Imagen+de+Notas" alt="Imagen de las notas principales de la fragancia" class="w-full h-auto object-contain rounded-lg">`;
+
+        // Mostrar las notas, historia y precios
+        document.getElementById('product-detail-story').textContent = fragrance.story;
+
+        let pricesHtml = '';
+        for (const [size, price] of Object.entries(fragrance.prices)) {
+            pricesHtml += `
+                <div class="flex justify-start items-center space-x-2">
+                    <span class="text-subtle-gold text-xl font-bold">${size}:</span>
+                    <span class="text-xl font-bold text-main-gold">COP ${price}</span>
+                </div>
+            `;
+        }
+        document.getElementById('product-detail-prices').innerHTML = pricesHtml;
+        
+        const addToCartBtn = document.getElementById('add-to-cart-btn-detail');
+        addToCartBtn.onclick = () => {
+             // Por defecto, añadir la botella de 100ml
+             addToCart(fragrance.name, fragrance.prices['100ml'], '100ml');
+        };
+
+        // Mostrar la sección de detalles y ocultar las otras
+        showSection('page-product-detail');
+    }
+    window.renderProductDetail = renderProductDetail;
+
+    // Función para renderizar las fragancias
+    function renderFragrances(containerId, type = null) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        
+        let filteredFragrances = fragrances;
+        if (type === 'masculine') {
+            filteredFragrances = fragrances.filter(f => f.type === 'masculine');
+        } else if (type === 'feminine') {
+            filteredFragrances = fragrances.filter(f => f.type === 'feminine');
+        } else {
+            // Mezclar para la colección completa
+            filteredFragrances = shuffleArray([...fragrances]);
+        }
+        
+        filteredFragrances.forEach(fragrance => {
+            container.appendChild(createFragranceCard(fragrance));
+        });
+    }
+    
+    // Llamadas iniciales
+    showSection('page-principal');
+    renderFragrances('fragrances-container');
+    renderFragrances('fragrances-el-container', 'masculine');
+    renderFragrances('fragrances-ella-container', 'feminine');
+
+    function showSection(sectionId) {
+        // Cierra el menú de hamburguesa si está abierto
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const mainBody = document.body;
+        if (hamburgerMenu.classList.contains('open')) {
+            hamburgerMenu.classList.remove('open');
+            mainBody.style.overflow = 'auto';
+        }
+
+        const sections = {
+            'page-principal': document.getElementById('page-principal'),
+            'page-coleccion': document.getElementById('page-coleccion'),
+            'page-para-el': document.getElementById('page-para-el'),
+            'page-para-ella': document.getElementById('page-para-ella'),
+            'page-product-detail': document.getElementById('page-product-detail')
+        };
+        for (let id in sections) {
+            if (sections[id]) {
+                sections[id].classList.remove('active');
+            }
+        }
+        const sectionToShow = document.getElementById(sectionId);
+        if (sectionToShow) {
+            sectionToShow.classList.add('active');
+            if (sectionId === 'page-coleccion') {
+                renderFragrances('fragrances-container');
+            } else if (sectionId === 'page-para-el') {
+                renderFragrances('fragrances-el-container', 'masculine');
+            } else if (sectionId === 'page-para-ella') {
+                renderFragrances('fragrances-ella-container', 'feminine');
+            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    }
+    window.showSection = showSection;
+    
+    function scrollAnchor(anchorId) {
+        setTimeout(() => {
+            const anchorElement = document.querySelector(anchorId);
+            if (anchorElement) {
+                const headerOffset = 80; // Altura del encabezado fijo
+                const elementPosition = anchorElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
+    }
+    window.scrollAnchor = scrollAnchor;
+
+    // Añadir clase de transición al cargar
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) {
+        mainContent.classList.add('active');
+    }
+
+    /* ---------------- Carrito de compras y productos ---------------- */
+    let cart = {};
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const closeCartBtn = document.getElementById('cart-close-btn');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartTotalSpan = document.getElementById('cart-total');
+    const scentStoryModal = document.getElementById('scent-story-modal');
+    const scentStoryText = document.getElementById('scent-story-text');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+
+    // Abrir/cerrar modal
+    function openModal(text) {
+        if (!scentStoryModal || !scentStoryText) return;
+        scentStoryText.textContent = text;
+        scentStoryModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!scentStoryModal) return;
+        scentStoryModal.classList.remove('open');
+        document.body.style.overflow = 'auto';
+    }
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+    
+    // Actualizar la vista del carrito
+    function updateCartDisplay() {
+        if (!cartItemsContainer || !cartTotalSpan) return;
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        let itemCount = 0;
+        const cartKeys = Object.keys(cart);
+
+        if (cartKeys.length === 0) {
+            cartItemsContainer.innerHTML = '<p id="empty-cart-message">Tu carrito está vacío.</p>';
+        } else {
+            cartKeys.forEach(key => {
+                const itemData = cart[key];
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item text-subtle-gold';
+                itemElement.innerHTML = `
+                    <div class="flex-1">${itemData.name} (${itemData.size})</div>
+                    <div class="flex-1 text-center">$${(itemData.price * itemData.quantity).toFixed(2)}</div>
+                    <div class="cart-item-controls flex items-center justify-end">
+                        <button class="decrement-btn" data-fragrance="${key}">-</button>
+                        <span class="cart-item-quantity">${itemData.quantity}</span>
+                        <button class="increment-btn" data-fragrance="${key}">+</button>
+                        <button class="remove-btn ml-2 text-red-400" data-fragrance="${key}">x</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+                total += itemData.price * itemData.quantity;
+                itemCount += itemData.quantity;
+            });
+        }
+        cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function addToCart(fragranceName, fragrancePrice, fragranceSize) {
+        const key = `${fragranceName} - ${fragranceSize}`;
+        if (cart[key]) {
+            cart[key].quantity += 1;
+        } else {
+            cart[key] = { name: fragranceName, price: fragrancePrice, quantity: 1, size: fragranceSize };
+        }
+        updateCartDisplay();
+        showToast(`¡${fragranceName} (${fragranceSize}) añadido al carrito!`);
+    }
+
+    // Delegación de eventos para botones del carrito
+    if (cartItemsContainer) {
+        cartItemsContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const fragName = btn.dataset.fragrance;
+            if (!fragName) return;
+
+            if (btn.classList.contains('increment-btn')) {
+                if (cart[fragName]) {
+                    cart[fragName].quantity++;
+                }
+            } else if (btn.classList.contains('decrement-btn')) {
+                if (cart[fragName] && cart[fragName].quantity > 1) {
+                    cart[fragName].quantity--;
+                } else {
+                    delete cart[fragName];
+                }
+            } else if (btn.classList.contains('remove-btn')) {
+                delete cart[fragName];
+            }
+            updateCartDisplay();
+        });
+    }
+
+    // Funciones para abrir y cerrar el carrito
+    function openCart() {
+        if (cartSidebar) cartSidebar.classList.add('open');
+    }
+    window.openCart = openCart;
+    if (closeCartBtn) closeCartBtn.addEventListener('click', () => { if (cartSidebar) cartSidebar.classList.remove('open'); });
+
+    // Notificación Toast
+    function showToast(message) {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) return;
+        
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+    window.showToast = showToast;
+
+    // Manejar eventos de productos
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const target = e.currentTarget;
+            const fragranceName = target.dataset.fragrance;
+            const fragrancePrice = parseFloat(target.dataset.price || '0');
+            const fragranceSize = target.dataset.size;
+
+            if (!fragranceName) return;
+            addToCart(fragranceName, fragrancePrice, fragranceSize);
+        });
+    });
+
+    document.querySelectorAll('.scent-story-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const target = e.currentTarget;
+            const scentStory = target.dataset.scentStory;
+            if (scentStory) {
+                openModal(scentStory);
+            }
+        });
+    });
+    
+    /* ---------------- Texto curvo ---------------- */
+    const textExplora = 'EXPLORA';
+    const textColeccion = 'COLECCIÓN';
+    const curvedTextC = document.querySelector('.curved-text-c');
+    const curvedTextS = document.querySelector('.curved-text-s');
+    const radiusC = 120;
+    const startAngleC = -45;
+    const radiusS = 120;
+    const startAngleS = -60;
+
+    function createCurvedText(text, element, radius, startAngle) {
+        if (!element) return;
+        element.innerHTML = '';
+        let currentAngle = startAngle;
+        const angleStep = 10;
+        for (let i = 0; i < text.length; i++) {
+            let char = text[i];
+            let span = document.createElement('span');
+            span.textContent = char;
+            span.style.transform = `rotate(${currentAngle}deg) translate(0px, -${radius}px)`;
+            element.appendChild(span);
+            currentAngle += angleStep;
+        }
+    }
+    
+    createCurvedText(textExplora, curvedTextC, radiusC, startAngleC);
+    createCurvedText(textColeccion, curvedTextS, radiusS, startAngleS);
+    
+    /* ---------------- Navegación y menú de hamburguesa ---------------- */
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const menuCloseBtnNav = document.getElementById('menu-close-btn');
+    const essencesToggle = document.getElementById('essences-toggle');
+    const essencesDropdown = document.getElementById('essences-dropdown');
+    
+    if (hamburgerButton && hamburgerMenu) {
+        hamburgerButton.addEventListener('click', () => {
+            hamburgerMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (menuCloseBtnNav && hamburgerMenu) {
+        menuCloseBtnNav.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    if (essencesToggle && essencesDropdown) {
+        essencesToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            essencesDropdown.classList.toggle('open');
+            const plusSign = essencesToggle.querySelector('span');
+            if (plusSign) {
+                plusSign.textContent = essencesDropdown.classList.contains('open') ? '-' : '+';
+            }
+        });
+    }
+    
+    // Asignar los eventos de clic a los enlaces del menú
+    document.querySelectorAll('.menu-dropdown a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita el comportamiento por defecto de la recarga
+            const sectionId = e.target.getAttribute('onclick').match(/'([^']+)'/)[1];
+            showSection(sectionId);
+        });
+    });
+
+    document.querySelector('.hero-background a').addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('page-coleccion');
+    });
+
+    document.querySelector('.flex.justify-center.space-x-6 a:nth-child(1)').addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('page-para-el');
+    });
+
+    document.querySelector('.flex.justify-center.space-x-6 a:nth-child(2)').addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('page-para-ella');
+    });
+
+    // Llamar a showSection directamente sin el enlace
+    window.showSection = function(sectionId) {
+        const sections = {
+            'page-principal': document.getElementById('page-principal'),
+            'page-coleccion': document.getElementById('page-coleccion'),
+            'page-para-el': document.getElementById('page-para-el'),
+            'page-para-ella': document.getElementById('page-para-ella'),
+            'page-product-detail': document.getElementById('page-product-detail')
+        };
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        if (hamburgerMenu.classList.contains('open')) {
+            hamburgerMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        for (let id in sections) {
+            if (sections[id]) {
+                sections[id].classList.remove('active');
+            }
+        }
+        const sectionToShow = document.getElementById(sectionId);
+        if (sectionToShow) {
+            sectionToShow.classList.add('active');
+            if (sectionId === 'page-coleccion') {
+                renderFragrances('fragrances-container');
+            } else if (sectionId === 'page-para-el') {
+                renderFragrances('fragrances-el-container', 'masculine');
+            } else if (sectionId === 'page-para-ella') {
+                renderFragrances('fragrances-ella-container', 'feminine');
+            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    function closeMenu() {
+        if (hamburgerMenu) hamburgerMenu.classList.remove('open');
+        document.body.style.overflow = 'auto';
+    }
+    window.closeMenu = closeMenu;
+
+    /* ---------------- Formulario de contacto ---------------- */
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message-input').value;
+            const contactMessageDiv = document.getElementById('contact-message');
+
+            if (email && message) {
+                contactMessageDiv.innerHTML = '<p class="text-main-gold">¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.</p>';
+                contactForm.reset();
+            } else {
+                contactMessageDiv.innerHTML = '<p class="text-red-400">Por favor, completa todos los campos.</p>';
+            }
+        });
+    }
+    
+}); // end DOMContentLoaded
+</script>
+<script>
+// --- Chatbot Logic ---
+const chatbotButton = document.getElementById('chatbot-button');
+const chatbotWindow = document.getElementById('chatbot-window');
+const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+const chatbotBody = document.getElementById('chatbot-body');
+const chatbotInput = document.getElementById('chatbot-input');
+const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+
+// Gemini API configuration
+const apiKey = ""; // Leave as-is. The platform provides the key at runtime.
+const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=" + apiKey;
+
+const systemInstruction = `
+    Eres un asistente de fragancias llamado "Tu Asistente De Fragancias". Tu rol es ayudar a los clientes a encontrar el perfume perfecto y responder a sus preguntas sobre los productos de COESSENS. Eres amigable, profesional y conocedor. Utiliza el español de Colombia.
+
+    **Tus respuestas deben ser concisas, directas y al grano. Evita la información redundante y los detalles excesivos. Sé dinámico y convincente, enfocándote en lo que el cliente realmente necesita saber.**
+    
+    **Debes basar TODAS tus respuestas exclusivamente en la información proporcionada a continuación. No inventes ni utilices conocimiento externo.**
+    
+    Catálogo de Fragancias (utiliza esta información para responder a consultas de productos, precios, notas, dulzura, ocasiones e historias):
+    
+    1. **Invictus Victory** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una explosión de frescura y poder que celebra la victoria. Para el hombre que desafía los límites.
+       - Notas: fresco, especiado
+       - Dulzura: bajo
+       - Ocasión: diario, deportivo
+
+    2. **La Beau Le Parufum** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una fragancia audaz y carismática que captura la esencia de la fuerza indomable. Un aroma inolvidable.
+       - Notas: dulce, ámbar
+       - Dulzura: alto
+       - Ocasión: formal, noche
+
+    3. **Ombre Nómada** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Un viaje olfativo por el desierto, con notas de cuero y maderas. Ideal para el explorador moderno.
+       - Notas: amaderado, cuero
+       - Dulzura: bajo
+       - Ocasión: formal, noche
+
+    4. **Mandarin Sky** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una fragancia cítrica y luminosa, con un toque de frescura del cielo. Perfecta para días soleados.
+       - Notas: cítrico, fresco
+       - Dulzura: medio
+       - Ocasión: diario
+
+    5. **Sauvage** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una composición radicalmente fresca y cruda, inspirada en los grandes espacios abiertos. Un aroma salvaje y elegante.
+       - Notas: fresco, especiado
+       - Dulzura: bajo
+       - Ocasión: diario, informal
+
+    6. **Club de Nuit** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una fragancia misteriosa y seductora, perfecta para las noches. Combina notas de especias y maderas para un efecto duradero.
+       - Notas: especiado, amaderado
+       - Dulzura: medio
+       - Ocasión: noche, formal
+
+    7. **9pm** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: El aroma de una noche vibrante y llena de energía. Una mezcla de dulzura y frescura que no deja a nadie indiferente.
+       - Notas: dulce, vainilla
+       - Dulzura: alto
+       - Ocasión: noche, fiesta
+
+    8. **Santal 33** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Un aroma icónico que evoca el espíritu del oeste americano con notas de sándalo y cuero. Un perfume con carácter.
+       - Notas: amaderado, cuero
+       - Dulzura: bajo
+       - Ocasión: diario, informal
+
+    9. **Khamra Qahwa** (Masculino):
+       - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+       - Historia: Una fragancia gourmand con notas de café y especias. Un aroma cálido y adictivo para los amantes de lo exótico.
+       - Notas: gourmand, especiado
+       - Dulzura: alto
+       - Ocasión: noche
+
+    10. **Aqua de Gio** (Masculino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: La esencia de la brisa marina y la libertad. Un perfume fresco y acuático que captura la energía del mar.
+        - Notas: fresco, acuático
+        - Dulzura: bajo
+        - Ocasión: diario, deportivo
+
+    11. **Lattafa Amethyst** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Una joya olfativa que combina la dulzura de las frutas con la calidez del ámbar. Una fragancia para la mujer elegante y segura.
+        - Notas: ámbar, afrutado
+        - Dulzura: medio
+        - Ocasión: formal, noche
+
+    12. **Yara** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Una mezcla de frutas y flores que te harán sentir como una supermodelo. Una fragancia divertida y coqueta.
+        - Notas: afrutado, floral
+        - Dulzura: alto
+        - Ocasión: diario, informal
+
+    13. **Cloud Pink** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Un sueño hecho perfume, con un toque de dulzura y la suavidad de las nubes. Para un espíritu joven y soñador.
+        - Notas: gourmand, dulce
+        - Dulzura: alto
+        - Ocasión: diario, informal
+
+    14. **Montale Intense Coffee** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: El aroma intenso y adictivo del café recién molido, mezclado con la dulzura de la vainilla. Para la mujer sofisticada y apasionada.
+        - Notas: gourmand, vainilla
+        - Dulzura: alto
+        - Ocasión: noche
+
+    15. **212 VIP Rosé** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Una fragancia festiva y elegante, inspirada en la energía de Nueva York. Un aroma vibrante y chispeante para la mujer que vive la vida al máximo.
+        - Notas: champagne, afrutado
+        - Dulzura: medio
+        - Ocasión: fiesta, evento
+
+    16. **Ahli Corvus** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Un misterio en una botella, con notas oscuras y florales. Para la mujer enigmática y poderosa.
+        - Notas: oscuro, floral
+        - Dulzura: bajo
+        - Ocasión: noche, formal
+
+    17. **D&G Devotion** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Una declaración de amor, con notas de flores blancas y vainilla. Una fragancia dulce y apasionada.
+        - Notas: floral, gourmand
+        - Dulzura: alto
+        - Ocasión: formal
+
+    18. **Baccarat Rouge 540** (Femenino):
+        - Precios: 100ml: 34000 COP, 50ml: 22000 COP, 30ml: 17000 COP
+        - Historia: Un perfume de lujo con un toque de misterio. Sus notas de ámbar y azafrán crean un aroma inolvidable y elegante.
+        - Notas: ámbar, amaderado
+        - Dulzura: medio
+        - Ocasión: formal, noche
+
+    Información general de COESSENS:
+    - Somos una perfumería de lujo especializada en fragancias inspiradas.
+    - Nuestras fragancias están formuladas para durar más de 12 horas.
+    - Ofrecemos calidad superior a un precio exclusivo.
+    - No son perfumes originales de marca, sino inspiraciones de alta calidad.
+    - Estamos ubicados en Cartago, Valle del Cauca, Colombia.
+    - Hacemos envíos a todo el país.
+`;
+let chatHistory = [];
+
+function sendMessageToChatbot(message, isUser = false) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chatbot-message', isUser ? 'user' : 'bot');
+    messageElement.innerHTML = message;
+    chatbotBody.appendChild(messageElement);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+}
+
+async function processMessageWithGemini(userMessage) {
+    sendMessageToChatbot('<span class="loader"></span>', false);
+
+    chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+    const payload = {
+        contents: chatHistory,
+        systemInstruction: { parts: [{ text: systemInstruction }] }
+    };
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+        const botMessage = result.candidates[0].content.parts[0].text;
+        
+        chatHistory.push({ role: "model", parts: [{ text: botMessage }] });
+
+        chatbotBody.querySelector('.loader').remove();
+        sendMessageToChatbot(botMessage, false);
+
+    } catch (error) {
+        console.error('Error al llamar a la API de Gemini:', error);
+        if (chatbotBody.querySelector('.loader')) {
+            chatbotBody.querySelector('.loader').remove();
+        }
+        sendMessageToChatbot("Lo siento, no puedo procesar tu solicitud en este momento. Inténtalo de nuevo más tarde.", false);
+    }
+}
+
+chatbotButton.addEventListener('click', () => {
+    chatbotWindow.classList.toggle('open');
+    if (chatbotWindow.classList.contains('open')) {
+        chatHistory = []; // Reset history on open
+        sendMessageToChatbot('¡Hola! Soy tu asistente de fragancias. ¿En qué puedo ayudarte hoy?', false);
+    }
+});
+
+chatbotCloseBtn.addEventListener('click', () => {
+    chatbotWindow.classList.remove('open');
+});
+
+chatbotSendBtn.addEventListener('click', () => {
+    const userMessage = chatbotInput.value;
+    if (userMessage.trim() !== '') {
+        sendMessageToChatbot(userMessage, true);
+        processMessageWithGemini(userMessage);
+        chatbotInput.value = '';
+    }
+});
+
+chatbotInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        chatbotSendBtn.click();
+    }
+});
+</script>
+</body>
+</html>
